@@ -113,7 +113,9 @@ function removeFalsyValues(arr) {
  *    [ 'a', 'b', 'c', 'd', 'e', 'f', 'g' ]  => [ 'A', 'B', 'C', 'D', 'E', 'F', 'G' ]
  */
 function getUpperCaseStrings(arr) {
-  return arr.join().toUpperCase().split(',');
+  return arr.join()
+    .toUpperCase()
+    .split(',');
 }
 
 /**
@@ -195,7 +197,8 @@ function getTail(arr, n) {
  *    +'30,31,32,33,34'
  */
 function toCsvText(arr) {
-  return arr.map((arg) => arg.join(',')).join('\n');
+  return arr.map((arg) => arg.join(','))
+    .join('\n');
 }
 
 /**
@@ -262,9 +265,8 @@ function getSecondItems(arr) {
  */
 function propagateItemsByPositionIndex(arr) {
   return arr.reduce(
-    (accum, item, index) =>
-      accum.concat(Array.from({ length: index + 1 }, () => item)),
-    []
+    (accum, item, index) => accum.concat(Array.from({ length: index + 1 }, () => item)),
+    [],
   );
 }
 
@@ -338,7 +340,7 @@ function sortDigitNamesByNumericOrder(arr) {
     'eight',
     'nine',
   ];
-  return arr.sort((a, b) => numberNames.indexOf(a) > numberNames.indexOf(b));
+  return arr.sort((a, b) => numberNames.indexOf(a) - numberNames.indexOf(b));
 }
 
 /**
@@ -433,16 +435,8 @@ function toStringList(arr) {
  *    ]
  */
 function sortCitiesArray(arr) {
-  function compare(a, b) {
-    if (a.country < b.country) {
-      return -1;
-    }
-    if (a.country > b.country) {
-      return 1;
-    }
-    return 0;
-  }
-  return compare(arr);
+  return arr.sort((a, b) => (a.city >= b.city ? 1 : -1))
+    .sort((a, b) => (a.country >= b.country ? 1 : -1));
 }
 
 /**
