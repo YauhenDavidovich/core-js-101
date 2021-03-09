@@ -113,9 +113,7 @@ function removeFalsyValues(arr) {
  *    [ 'a', 'b', 'c', 'd', 'e', 'f', 'g' ]  => [ 'A', 'B', 'C', 'D', 'E', 'F', 'G' ]
  */
 function getUpperCaseStrings(arr) {
-  return arr.join()
-    .toUpperCase()
-    .split(',');
+  return arr.join().toUpperCase().split(',');
 }
 
 /**
@@ -197,8 +195,7 @@ function getTail(arr, n) {
  *    +'30,31,32,33,34'
  */
 function toCsvText(arr) {
-  return arr.map((arg) => arg.join(','))
-    .join('\n');
+  return arr.map((arg) => arg.join(',')).join('\n');
 }
 
 /**
@@ -264,11 +261,11 @@ function getSecondItems(arr) {
  *  [ 1,2,3,4,5 ] => [ 1, 2,2, 3,3,3, 4,4,4,4, 5,5,5,5,5 ]
  */
 function propagateItemsByPositionIndex(arr) {
-  return arr.reduce((accum, item, index) => (
-    accum.concat(Array.from(
-      { length: index + 1 }, () => item,
-    ))
-  ), []);
+  return arr.reduce(
+    (accum, item, index) =>
+      accum.concat(Array.from({ length: index + 1 }, () => item)),
+    []
+  );
 }
 
 /**
@@ -308,7 +305,7 @@ function get3TopItems(arr) {
  */
 function getPositivesCount(arr) {
   return arr.reduce((acc, e) => {
-    if ((Number.isInteger(e) && e > 0)) {
+    if (Number.isInteger(e) && e > 0) {
       return acc + 1;
     }
     return acc;
@@ -329,7 +326,18 @@ function getPositivesCount(arr) {
  *   [ 'one','one','one','zero' ]     => [ 'zero','one','one','one' ]
  */
 function sortDigitNamesByNumericOrder(arr) {
-  const numberNames = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
+  const numberNames = [
+    'zero',
+    'one',
+    'two',
+    'three',
+    'four',
+    'five',
+    'six',
+    'seven',
+    'eight',
+    'nine',
+  ];
   return arr.sort((a, b) => numberNames.indexOf(a) > numberNames.indexOf(b));
 }
 
@@ -424,8 +432,17 @@ function toStringList(arr) {
  *      { country: 'Russia',  city: 'Saint Petersburg' }
  *    ]
  */
-function sortCitiesArray(/* arr */) {
-  throw new Error('Not implemented');
+function sortCitiesArray(arr) {
+  function compare(a, b) {
+    if (a.country < b.country) {
+      return -1;
+    }
+    if (a.country > b.country) {
+      return 1;
+    }
+    return 0;
+  }
+  return compare(arr);
 }
 
 /**
@@ -464,7 +481,9 @@ function getIdentityMatrix(/* n */) {
  *     3, 3   => [ 3 ]
  */
 function getIntervalArray(start, end) {
-  return Array(end - start + 1).fill().map((_, idx) => start + idx);
+  return Array(end - start + 1)
+    .fill()
+    .map((_, idx) => start + idx);
 }
 
 /**
