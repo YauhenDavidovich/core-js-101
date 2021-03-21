@@ -168,17 +168,20 @@ function isInsideCircle(/* circle, point */) {
  * Returns the first non repeated char in the specified strings otherwise returns null.
  *
  * @param {string} str
- * @return {string}
+ * @return {string|null}
  *
  * @example:
  *   'The quick brown fox jumps over the lazy dog' => 'T'
  *   'abracadabra'  => 'c'
  *   'entente' => null
  */
-function findFirstSingleChar(/* str */) {
-  throw new Error('Not implemented');
+function findFirstSingleChar(str) {
+  for (let i = 0; i < str.length; i += 1) {
+    if ((str.slice(0, i) + str.slice(i + 1)).indexOf(str[i]) === -1) return str[i];
+  }
+  return null;
+  // throw new Error('Not implemented');
 }
-
 
 /**
  * Returns the string representation of math interval,
@@ -219,8 +222,13 @@ function getIntervalString(/* a, b, isStartIncluded, isEndIncluded */) {
  * 'rotator' => 'rotator'
  * 'noon' => 'noon'
  */
-function reverseString(/* str */) {
-  throw new Error('Not implemented');
+function reverseString(str) {
+  const arr = str.split('');
+  const newArr = [];
+  for (let i = arr.length - 1; i >= 0; i -= 1) {
+    newArr.push(arr[i]);
+  }
+  return newArr.join('');
 }
 
 
@@ -236,8 +244,13 @@ function reverseString(/* str */) {
  *   87354 => 45378
  *   34143 => 34143
  */
-function reverseInteger(/* num */) {
-  throw new Error('Not implemented');
+function reverseInteger(num) {
+  const arr = String(num).split('');
+  const newArr = [];
+  for (let i = arr.length - 1; i >= 0; i -= 1) {
+    newArr.push(arr[i]);
+  }
+  return Number(newArr.join(''));
 }
 
 
@@ -268,7 +281,7 @@ function isCreditCardNumber(/* ccn */) {
 /**
  * Returns the digital root of integer:
  *   step1 : find sum of all digits
- *   step2 : if sum > 9 then goto step1 otherwise return the sum
+ *   step2 : if sum > 9 then goto step1 otherconste return the sum
  *
  * @param {number} n
  * @return {number}
@@ -279,8 +292,12 @@ function isCreditCardNumber(/* ccn */) {
  *   10000 ( 1+0+0+0+0 = 1 ) => 1
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
-function getDigitalRoot(/* num */) {
-  throw new Error('Not implemented');
+function getDigitalRoot(num) {
+  function sumDigit(number) {
+    const preSumArr = String(number).split('');
+    return preSumArr.reduce((acc, el) => acc + Number(el), 0);
+  }
+  return sumDigit(sumDigit(num));
 }
 
 
