@@ -158,8 +158,8 @@ function insertItem(arr, item, index) {
  *    [ 1, 3, 4, 5 ], 2 => [ 1, 3 ]
  *    [ 'a', 'b', 'c', 'd'], 3  => [ 'a', 'b', 'c' ]
  */
-function getHead(/* arr, n */) {
-  throw new Error('Not implemented');
+function getHead(arr, n) {
+  return arr.slice(0, n);
 }
 
 /**
@@ -458,7 +458,11 @@ function sortCitiesArray(arr) {
  *           [0,0,0,0,1]]
  */
 function getIdentityMatrix(n) {
-  return Array(n).fill(0).map((el, i) => Array(n).fill(0).map((el1, in1) => (in1 === i ? 1 : 0)));
+  return Array(n)
+    .fill(0)
+    .map((el, i) => Array(n)
+      .fill(0)
+      .map((el1, in1) => (in1 === i ? 1 : 0)));
 }
 
 /**
@@ -580,8 +584,20 @@ function getElementByIndexes(/* arr, indexes */) {
  *   [ 1, 2, 3, 4, 5, 6, 7, 8 ]   =>  [ 5, 6, 7, 8, 1, 2, 3, 4 ]
  *
  */
-function swapHeadAndTail(/* arr */) {
-  throw new Error('Not implemented');
+function swapHeadAndTail(arr) {
+  let partLength = 0;
+  const middleArr = [];
+  if (arr.length % 2 !== 0) {
+    partLength = Math.floor(arr.length / 2);
+    middleArr.push(arr[Math.round(arr.length / 2) - 1]);
+    const head = arr.slice(0, partLength);
+    const tail = arr.slice(partLength + 1);
+    return tail.concat(middleArr, head);
+  }
+  partLength = arr.length / 2;
+  const head = arr.slice(0, partLength);
+  const tail = arr.slice(partLength);
+  return tail.concat(middleArr, head);
 }
 
 module.exports = {
