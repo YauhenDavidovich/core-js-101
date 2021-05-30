@@ -531,6 +531,13 @@ function distinct(arr) {
  */
 function group(/* array, keySelector, valueSelector */) {
   throw new Error('Not implemented');
+  // return array.reduce((obj, item) => {
+  //   const key = keySelector(item);
+  //   // eslint-disable-next-line no-param-reassign
+  //   obj[key] = obj[key] || [];
+  //   obj[key].push(`'${valueSelector(item)}'`);
+  //   return obj;
+  // }, {});
 }
 
 /**
@@ -546,10 +553,10 @@ function group(/* array, keySelector, valueSelector */) {
  *   [[1, 2], [3, 4], [5, 6]], (x) => x     =>   [ 1, 2, 3, 4, 5, 6 ]
  *   ['one','two','three'], x=>x.split('')  =>   ['o','n','e','t','w','o','t','h','r','e','e']
  */
-function selectMany(/* arr, childrenSelector */) {
-  throw new Error('Not implemented');
+function selectMany(arr, childrenSelector) {
+  const newArr = arr.map(childrenSelector);
+  return newArr.reduce((a, b) => a.concat(b), []);
 }
-
 /**
  * Returns an element from the multidimentional array by the specified indexes.
  *
@@ -562,8 +569,8 @@ function selectMany(/* arr, childrenSelector */) {
  *   ['one','two','three'], [2]       => 'three'  (arr[2])
  *   [[[ 1, 2, 3]]], [ 0, 0, 1 ]      => 2        (arr[0][0][1])
  */
-function getElementByIndexes(/* arr, indexes */) {
-  throw new Error('Not implemented');
+function getElementByIndexes(arr, indexes) {
+  return indexes.reduce((i, item) => i[item], arr);
 }
 
 /**
