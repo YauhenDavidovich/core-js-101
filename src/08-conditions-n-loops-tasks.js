@@ -118,7 +118,7 @@ function isTriangle(a, b, c) {
  *
  * @param {object} rect1
  * @param {object} rect2
- * @return {bool}
+ * @return {boolean}
  *
  * @example:
  *   { top: 0, left: 0, width: 10, height: 10 },
@@ -128,8 +128,16 @@ function isTriangle(a, b, c) {
  *   { top:20, left:20, width: 20, height: 20 }    =>  false
  *
  */
-function doRectanglesOverlap(/* rect1, rect2 */) {
-  throw new Error('Not implemented');
+function doRectanglesOverlap(rect1, rect2) {
+  const r2t = rect2.top;
+  const r2l = rect2.left;
+  const r1t = rect1.top;
+  const r1l = rect1.left;
+  const r1x = r1l + rect1.width;
+  const r2x = r2l + rect2.width;
+  const r1y = r1t + rect1.height;
+  const r2y = r2t + rect2.height;
+  return !(r1x < r2l || r2x < r1l || r1y < r2t || r2y < r1t);
 }
 
 
@@ -152,15 +160,18 @@ function doRectanglesOverlap(/* rect1, rect2 */) {
  *
  * @param {object} circle
  * @param {object} point
- * @return {bool}
+ * @return {boolean}
  *
  * @example:
  *   { center: { x:0, y:0 }, radius:10 },  { x:0, y:0 }     => true
  *   { center: { x:0, y:0 }, radius:10 },  { x:10, y:10 }   => false
  *
  */
-function isInsideCircle(/* circle, point */) {
-  throw new Error('Not implemented');
+
+function isInsideCircle(circle, point) {
+  const centX = circle.center.x;
+  const centY = circle.center.y;
+  return (point.x - centX) ** 2 + (point.y - centY) ** 2 < circle.radius ** 2;
 }
 
 
@@ -245,7 +256,8 @@ function reverseString(str) {
  *   34143 => 34143
  */
 function reverseInteger(num) {
-  const arr = String(num).split('');
+  const arr = String(num)
+    .split('');
   const newArr = [];
   for (let i = arr.length - 1; i >= 0; i -= 1) {
     newArr.push(arr[i]);
@@ -275,7 +287,8 @@ function reverseInteger(num) {
  *   4916123456789012 => false
  */
 function isCreditCardNumber(ccn) {
-  const arrayDigits = ccn.toString(10).split('');
+  const arrayDigits = ccn.toString(10)
+    .split('');
   const sum = arrayDigits.reduce((acc, item, index) => {
     let cardNum = parseInt(item, 10);
     if ((arrayDigits.length - index) % 2 === 0) {
@@ -306,9 +319,11 @@ function isCreditCardNumber(ccn) {
  */
 function getDigitalRoot(num) {
   function sumDigit(number) {
-    const preSumArr = String(number).split('');
+    const preSumArr = String(number)
+      .split('');
     return preSumArr.reduce((acc, el) => acc + Number(el), 0);
   }
+
   return sumDigit(sumDigit(num));
 }
 
@@ -389,8 +404,17 @@ function toNaryString(/* num, n */) {
  *   ['/web/assets/style.css', '/.bin/mocha',  '/read.me'] => '/'
  *   ['/web/favicon.ico', '/web-scripts/dump', '/webalizer/logs'] => '/'
  */
-function getCommonDirectoryPath(/* pathes */) {
-  throw new Error('Not implemented');
+function getCommonDirectoryPath(pathes) {
+  const minPath = pathes.reduce((acc, val) => (acc.length <= val.length ? acc : val));
+  let result = '';
+  for (let i = 0; i < minPath.length; i += 1) {
+    if (pathes.every((val) => val.indexOf(minPath[i]) !== -1)) {
+      result += minPath[i];
+    } else {
+      break;
+    }
+  }
+  return result.substring(0, result.lastIndexOf('/') + 1);
 }
 
 
